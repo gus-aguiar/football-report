@@ -1,5 +1,5 @@
 import { Model, QueryInterface, DataTypes } from 'sequelize';
-import  IUsers  from '../../Interfaces/IUsers';
+import { IUsers } from '../../Interfaces/IUsers';
 
 export default {
   up(queryInterface: QueryInterface) {
@@ -10,7 +10,7 @@ export default {
         autoIncrement: true,
         primaryKey: true,
       },
-      userName: {
+      username: {
         field: 'username',
         type: DataTypes.STRING,
         allowNull: false,
