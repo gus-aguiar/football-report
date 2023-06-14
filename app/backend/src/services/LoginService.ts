@@ -18,8 +18,8 @@ export default class UserService {
       if (!bcrypt.compareSync(data.password, user.password)) {
         return { status: 'INVALID_DATA', data: { message: 'Invalid email or password' } };
       }
-      const { email } = user as IUsers;
-      const token = this.jwtService.sign({ email });
+      const { email, id, role, username } = user as IUsers;
+      const token = this.jwtService.sign({ email, id, role, username });
       return { status: 'SUCCESSFUL', data: { token } };
     }
     return { status: 'INVALID_DATA', data: { message: 'Invalid email or password' } };
