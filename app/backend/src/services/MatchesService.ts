@@ -13,6 +13,20 @@ export default class MatchesService {
     return { status: 'SUCCESSFUL', data: allMatches };
   }
 
+  public async getMatchesInProgress(): Promise<ServiceResponse<IMatches[]>> {
+    const allMatches = await this.matchesModel
+      .findAll();
+    const inProgressMatches = allMatches.filter((match) => match.inProgress === true);
+    return { status: 'SUCCESSFUL', data: inProgressMatches };
+  }
+
+  public async getMatchesNotInProgress(): Promise<ServiceResponse<IMatches[]>> {
+    const allMatches = await this.matchesModel
+      .findAll();
+    const inProgressMatches = allMatches.filter((match) => match.inProgress === false);
+    return { status: 'SUCCESSFUL', data: inProgressMatches };
+  }
+
   public async getMatchesById(id: number): Promise<ServiceResponse<IMatches>> {
     const match = await this.matchesModel.findById(id);
     if (!match) return { status: 'NOT_FOUND', data: { message: `Match ${id} not found` } };
