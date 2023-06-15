@@ -5,6 +5,7 @@ export default function mapStatusHTTP(status: string): number {
     case 'NOT_FOUND': return 404;
     case 'CONFLICT': return 409;
     case 'CREATED': return 201;
+    case 'EQUAL_TEAMS': return 422;
     default: return 500;
   }
 }

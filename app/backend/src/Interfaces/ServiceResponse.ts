@@ -17,7 +17,13 @@ export type ServiceResponseCreated<T> = {
   data: T
 };
 
+export type ServiceResponseEqualTeams = {
+  status: 'EQUAL_TEAMS',
+  data: ServiceMessage
+};
+
 export type ServiceResponse<T> =
 ServiceResponseError |
 ServiceResponseSuccess<T> |
-ServiceResponseCreated<T>;
+ServiceResponseCreated<T> |
+ServiceResponseEqualTeams;
