@@ -42,4 +42,8 @@ export default class MatchModel implements IMatchesModel {
         inProgress }: IMatches = dbData;
     return { id, homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress };
   }
+
+  async finishMatch(id: IMatches['id']): Promise<void> {
+    await this.model.update({ inProgress: false }, { where: { id } });
+  }
 }

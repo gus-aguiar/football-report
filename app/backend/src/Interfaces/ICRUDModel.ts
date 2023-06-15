@@ -3,4 +3,10 @@ export interface ICRUDModelReader<T> {
   findById(id: number): Promise<T | null>,
 }
 
-export type ICRUDModel<T> = ICRUDModelReader<T>;
+export interface ICRUDModelDeleter {
+  finishMatch(id: number): Promise<void>,
+}
+
+export interface ICRUDModel<T>
+  extends ICRUDModelReader<T>,
+  ICRUDModelDeleter { }
