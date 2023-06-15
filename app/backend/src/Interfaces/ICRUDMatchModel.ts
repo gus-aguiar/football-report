@@ -8,6 +8,11 @@ export interface ICRUDMatchModelDeleter {
   updateMatch(id: number, homeTeamGoals: number, awayTeamGoals: number): Promise<void>,
 }
 
+export interface ICRUDMatchModelCreator<T> {
+  createMatch(data: Partial<T>): Promise<T>
+}
+
 export interface ICRUDMatchModel<T>
   extends ICRUDMatchModelReader<T>,
+  ICRUDMatchModelCreator<T>,
   ICRUDMatchModelDeleter { }

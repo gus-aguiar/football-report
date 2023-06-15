@@ -8,6 +8,10 @@ const router = Router();
 
 // router.get('/', (req: Request, res: Response) => matchesController.getAllMatches(req, res));
 
+router.post('/', Validations.validateToken, (req: Request, res: Response) => {
+  matchesController.createMatch(req, res);
+});
+
 router.get('/', (req: Request, res: Response) => {
   if (req.query.inProgress === 'true') {
     matchesController.getMatchesInProgress(req, res);
