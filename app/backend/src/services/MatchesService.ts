@@ -3,6 +3,7 @@ import IMatches from '../Interfaces/IMatches';
 import { IMatchesModel } from '../Interfaces/IMatchesModel';
 import { ServiceResponse, ServiceMessage } from '../Interfaces/ServiceResponse';
 import { NewEntity } from '../Interfaces';
+import ILeaderboard from '../Interfaces/ILeaderboard';
 
 export default class MatchesService {
   constructor(
@@ -64,5 +65,10 @@ export default class MatchesService {
     }
     const newMatch = await this.matchesModel.createMatch(match);
     return { status: 'CREATED', data: newMatch };
+  }
+
+  public async getLeaderboard(): Promise<ServiceResponse<ILeaderboard[]>> {
+    const leaderboard = await this.matchesModel.getLeaderboard();
+    return { status: 'SUCCESSFUL', data: leaderboard };
   }
 }

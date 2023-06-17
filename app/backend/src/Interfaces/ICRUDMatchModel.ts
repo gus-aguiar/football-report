@@ -1,3 +1,5 @@
+import ILeaderboard from './ILeaderboard';
+
 export interface ICRUDMatchModelReader<T> {
   findAll(): Promise<T[]>,
   findById(id: number): Promise<T | null>,
@@ -12,7 +14,12 @@ export interface ICRUDMatchModelCreator<T> {
   createMatch(data: Partial<T>): Promise<T>
 }
 
+export interface ICRUDMatchModelGetLeaderboard {
+  getLeaderboard(): Promise<ILeaderboard[]>
+}
+
 export interface ICRUDMatchModel<T>
   extends ICRUDMatchModelReader<T>,
   ICRUDMatchModelCreator<T>,
+  ICRUDMatchModelGetLeaderboard,
   ICRUDMatchModelDeleter { }

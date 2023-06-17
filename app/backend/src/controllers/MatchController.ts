@@ -31,7 +31,7 @@ export default class MatchesController {
       return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
     }
 
-    res.status(200).json(serviceResponse.data);
+    res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
 
   public async finishMatch(req: Request, res: Response): Promise<Response> {
@@ -42,7 +42,7 @@ export default class MatchesController {
       return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
     }
 
-    return res.status(200).json(serviceResponse.data);
+    return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
 
   public async updateMatch(req: Request, res: Response): Promise<Response> {
@@ -54,11 +54,16 @@ export default class MatchesController {
       return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
     }
 
-    return res.status(200).json(serviceResponse.data);
+    return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
 
   public async createMatch(req: Request, res: Response) {
     const serviceResponse = await this.matchesService.createMatch(req.body);
     return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+  }
+
+  public async getLeaderboard(_req: Request, res: Response) {
+    const serviceResponse = await this.matchesService.getLeaderboard();
+    res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
 }
