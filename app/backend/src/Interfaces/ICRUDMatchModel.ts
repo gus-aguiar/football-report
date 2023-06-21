@@ -15,7 +15,8 @@ export interface ICRUDMatchModelCreator<T> {
 }
 
 export interface ICRUDMatchModelGetLeaderboard {
-  getLeaderboard(): Promise<ILeaderboard[]>
+  getLeaderboardHomeTeam(): Promise<ILeaderboard[]>,
+  getLeaderboardAwayTeam(): Promise<ILeaderboard[]>
 }
 
 export interface ICRUDMatchModel<T>

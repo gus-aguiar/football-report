@@ -67,8 +67,13 @@ export default class MatchesService {
     return { status: 'CREATED', data: newMatch };
   }
 
-  public async getLeaderboard(): Promise<ServiceResponse<ILeaderboard[]>> {
-    const leaderboard = await this.matchesModel.getLeaderboard();
-    return { status: 'SUCCESSFUL', data: leaderboard };
+  public async getLeaderboardHomeTeam(): Promise<ServiceResponse<ILeaderboard[]>> {
+    const leaderboardHomeTeam = await this.matchesModel.getLeaderboardHomeTeam();
+    return { status: 'SUCCESSFUL', data: leaderboardHomeTeam };
+  }
+
+  public async getLeaderboardAwayTeam(): Promise<ServiceResponse<ILeaderboard[]>> {
+    const leaderboardAwayTeam = await this.matchesModel.getLeaderboardAwayTeam();
+    return { status: 'SUCCESSFUL', data: leaderboardAwayTeam };
   }
 }

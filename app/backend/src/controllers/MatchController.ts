@@ -62,8 +62,13 @@ export default class MatchesController {
     return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
 
-  public async getLeaderboard(_req: Request, res: Response) {
-    const serviceResponse = await this.matchesService.getLeaderboard();
+  public async getLeaderboardHomeTeam(_req: Request, res: Response) {
+    const serviceResponse = await this.matchesService.getLeaderboardHomeTeam();
+    res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+  }
+
+  public async getLeaderboardAwayTeam(_req: Request, res: Response) {
+    const serviceResponse = await this.matchesService.getLeaderboardAwayTeam();
     res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
 }
