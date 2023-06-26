@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Match API', () => {
-    let token: string; // To store the authentication token
+    let token: string;
   
     beforeEach(async () => {
       const chaiHttpResponse = await chai.request(app)
@@ -124,5 +124,5 @@ describe('Match API', () => {
     expect(chaiHttpResponse8.body).to.be.an('array');
   });
 });
-//test
+
 
