@@ -111,4 +111,102 @@ goalsBalance DESC,
 goalsFavor DESC;
 `;
 
-export { leaderboardQueryHomeTeams, leaderboardQueryAwayTeams };
+const leaderboardQuery = `
+SELECT name,
+  SUM(totalPoints) AS totalPoints,
+  SUM(totalGames) AS totalGames,
+  SUM(totalVictories) AS totalVictories,
+  SUM(totalDraws) AS totalDraws,
+  SUM(totalLosses) AS totalLosses,
+  SUM(goalsFavor) AS goalsFavor,
+  SUM(goalsOwn) AS goalsOwn,
+  SUM(goalsBalance) AS goalsBalance,
+  ROUND((SUM(totalPoints) / (SUM(totalGames) * 3.0)) * 100, 2) AS efficiency
+FROM (
+  SELECT
+    t.team_name AS name,
+    SUM(
+      CASE
+        WHEN matches.home_team_goals < matches.away_team_goals THEN 3
+        WHEN matches.home_team_goals = matches.away_team_goals THEN 1
+        ELSE 0
+      END
+    ) AS totalPoints,
+    COUNT(*) AS totalGames,
+    SUM(
+      CASE
+        WHEN matches.home_team_goals < matches.away_team_goals THEN 1
+        ELSE 0
+      END
+    ) AS totalVictories,
+    SUM(
+      CASE
+        WHEN matches.home_team_goals = matches.away_team_goals THEN 1
+        ELSE 0
+      END
+    ) AS totalDraws,
+    SUM(
+      CASE
+        WHEN matches.home_team_goals > matches.away_team_goals THEN 1
+        ELSE 0
+      END
+    ) AS totalLosses,
+    SUM(matches.away_team_goals) AS goalsFavor,
+    SUM(matches.home_team_goals) AS goalsOwn,
+    SUM(matches.away_team_goals) - SUM(matches.home_team_goals) AS goalsBalance
+  FROM
+    TRYBE_FUTEBOL_CLUBE.matches AS matches
+    INNER JOIN TRYBE_FUTEBOL_CLUBE.teams AS t ON matches.away_team_id = t.id
+  WHERE
+    matches.in_progress = 0
+  GROUP BY
+    t.team_name
+  UNION
+  SELECT
+    t.team_name AS name,
+    SUM(
+      CASE
+        WHEN matches.home_team_goals > matches.away_team_goals THEN 3
+        WHEN matches.home_team_goals = matches.away_team_goals THEN 1
+        ELSE 0
+      END
+    ) AS totalPoints,
+    COUNT(*) AS totalGames,
+    SUM(
+      CASE
+        WHEN matches.home_team_goals > matches.away_team_goals THEN 1
+        ELSE 0
+      END
+    ) AS totalVictories,
+    SUM(
+      CASE
+        WHEN matches.home_team_goals = matches.away_team_goals THEN 1
+        ELSE 0
+      END
+    ) AS totalDraws,
+    SUM(
+      CASE
+        WHEN matches.home_team_goals < matches.away_team_goals THEN 1
+        ELSE 0
+      END
+    ) AS totalLosses,
+    SUM(matches.home_team_goals) AS goalsFavor,
+    SUM(matches.away_team_goals) AS goalsOwn,
+    SUM(matches.home_team_goals) - SUM(matches.away_team_goals) AS goalsBalance
+  FROM
+    TRYBE_FUTEBOL_CLUBE.matches AS matches
+    INNER JOIN TRYBE_FUTEBOL_CLUBE.teams AS t ON matches.home_team_id = t.id
+  WHERE
+    matches.in_progress = 0
+  GROUP BY
+    t.team_name
+) AS subquery
+GROUP BY name
+ORDER BY
+  totalPoints DESC,
+  totalVictories DESC,
+  goalsBalance DESC,
+  goalsFavor DESC;
+`;
+
+export { leaderboardQueryHomeTeams, leaderboardQueryAwayTeams, leaderboardQuery };

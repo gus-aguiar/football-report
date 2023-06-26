@@ -76,4 +76,9 @@ export default class MatchesService {
     const leaderboardAwayTeam = await this.matchesModel.getLeaderboardAwayTeam();
     return { status: 'SUCCESSFUL', data: leaderboardAwayTeam };
   }
+
+  public async getLeaderboard(): Promise<ServiceResponse<ILeaderboard[]>> {
+    const leaderboard = await this.matchesModel.getLeaderboard();
+    return { status: 'SUCCESSFUL', data: leaderboard };
+  }
 }

@@ -71,4 +71,9 @@ export default class MatchesController {
     const serviceResponse = await this.matchesService.getLeaderboardAwayTeam();
     res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
+
+  public async getLeaderboard(_req: Request, res: Response) {
+    const serviceResponse = await this.matchesService.getLeaderboard();
+    res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+  }
 }

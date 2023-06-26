@@ -9,4 +9,6 @@ router.get('/home', (req: Request, res: Response) => MatchesController
   .getLeaderboardHomeTeam(req, res));
 router.get('/away', (req: Request, res: Response) => MatchesController
   .getLeaderboardAwayTeam(req, res));
+router.get('/', (req: Request, res: Response) => MatchesController
+  .getLeaderboard(req, res));
 export default router;
