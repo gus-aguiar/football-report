@@ -4,9 +4,11 @@ import { IMatchesModel } from '../Interfaces/IMatchesModel';
 import TeamModel from '../database/models/TeamsModel';
 import { NewEntity } from '../Interfaces';
 import ILeaderboard from '../Interfaces/ILeaderboard';
-import { leaderboardQueryHomeTeams,
+import {
+  leaderboardQueryHomeTeams,
   leaderboardQueryAwayTeams,
-  leaderboardQuery } from '../utils/LeaderboardHandle';
+  leaderboardQuery,
+} from '../utils/LeaderboardHandle';
 
 export default class MatchModel implements IMatchesModel {
   private model = MatchesModel;
