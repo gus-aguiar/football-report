@@ -1,4 +1,4 @@
-# Trybe Futebol Clube - Backend
+# FootBall Report
 
 ## Visão Geral
 
@@ -25,7 +25,6 @@ Bem-vindo ao Trybe Futebol Clube! Este projeto oferece uma API para visualizaç�
 
 ### Frontend
 
-- Concluído, não requer modificações
 - Comunica-se com o backend através de `http://localhost:3001`
 
 ### Docker
@@ -48,9 +47,4 @@ Bem-vindo ao Trybe Futebol Clube! Este projeto oferece uma API para visualizaç�
 ## Execução
 
 - Utilize `npm run compose:up` na raiz do projeto para subir a aplicação com docker-compose
-- Recomenda-se descomentar linhas específicas no `docker-compose.yml` durante o desenvolvimento para live-reload
 
-### Testes e Avaliação
-
-- A aplicação deve ter um funcionamento mínimo para ser avaliada corretamente
-- Testes E2E serão executados, garantindo o correto funcionamento da aplicação
